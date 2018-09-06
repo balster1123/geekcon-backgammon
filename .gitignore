@@ -36,3 +36,4 @@
 *.user
 *.suo
 backgammon/Debug/
+backgammon/__vm/

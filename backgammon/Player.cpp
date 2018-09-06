@@ -4,11 +4,6 @@
 
 Settings s = Settings();
 
-Player::Player()
-{
-
-}
-
 Player::Player(int newPlayerId)
 {
 	id = newPlayerId;

@@ -5,7 +5,6 @@ class Player
 {
 public:
 	Colour colour;
-	Player();
 	Player(int newPlayerId);
 
 protected:
