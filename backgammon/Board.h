@@ -6,6 +6,7 @@ class Board
 {
 public:
 	Board();
+	void Setup();
 	void DisplayPieces();
 	void SetOriginPiece(Player player, int index);
 	void Move(Player player, int originalIndex, int targetIndex);
