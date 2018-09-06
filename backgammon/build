@@ -1,1 +1,1 @@
-clear &&  g++ main.cpp Board.cpp Piece.cpp && ./a.out
+clear &&  g++ main.cpp Board.cpp Piece.cpp Line.cpp && ./a.out

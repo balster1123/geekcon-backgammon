@@ -1,5 +1,5 @@
-#include "Piece.h"
 #include "Player.h"
+#include "Line.h"
 
 #pragma once
 class Board
@@ -11,8 +11,9 @@ public:
 	void Move(Player player, int originalIndex, int targetIndex);
 
 private:
-	Piece pieces[24][12];
+    Line lines[24];
 	int currentOriginIndex;
 	int* validMovementOptions;
+
 };
 
