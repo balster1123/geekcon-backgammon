@@ -6,7 +6,7 @@
 void test()
 {
     std::cout << "Starting tests!" << std::endl;
-    
+    Board* board = new Board();
     std::cout << "Finished tests!" << std::endl;
 }
 
