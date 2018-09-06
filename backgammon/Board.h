@@ -1,5 +1,5 @@
-#include <Piece.h>
-#include <Player.h>
+#include "Piece.h"
+#include "Player.h"
 
 #pragma once
 class Board

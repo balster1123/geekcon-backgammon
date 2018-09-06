@@ -1,4 +1,4 @@
-#include <Colour.h>
+#include "Colour.h"
 
 #pragma once
 class Piece
