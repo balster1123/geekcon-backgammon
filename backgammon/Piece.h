@@ -5,7 +5,7 @@ class Piece
 {
 public:
 	Piece();
-	Colour GetColour();
+	Colour* GetColour();
 
 protected:
 	int id;

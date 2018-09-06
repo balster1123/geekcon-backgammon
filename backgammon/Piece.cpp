@@ -5,6 +5,6 @@ Piece::Piece()
 {
 }
 
-Colour Piece::GetColour() {
-
+Colour* Piece::GetColour() {
+    return 0;
 }
