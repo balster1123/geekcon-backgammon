@@ -1,8 +1,14 @@
+#include <Colour.h>
+
 #pragma once
 class Piece
 {
 public:
 	Piece();
-	~Piece();
+	Colour GetColour();
+
+protected:
+	int id;
+	int playerId;
 };
 
