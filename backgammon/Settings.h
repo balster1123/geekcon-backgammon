@@ -7,4 +7,4 @@
 #define Player2Colour Colour(0, 255, 0);
 
 // Platform
-// #define ARDUINO_PLATFORM // Only define this when running on an Arduino; Comment out when running on a laptop
+#define ARDUINO_PLATFORM // Only define this when running on an Arduino; Comment out when running on a laptop
