@@ -16,12 +16,33 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
 {
     if (direction == DIRECTION_LEFT)
     {
-        joystick_location += 1;
+		movePointerLeft();
     }
     if (direction == DIRECTION_RIGHT)
     {
-        joystick_location -= 1;
+		movePointerRight();
     }
+}
+
+void GameManager::movePointerRight()
+{
+	joystick_location--;
+
+	if (joystick_location == -1)
+	{
+		joystick_location = Board::LINES_COUNT-1;
+	}
+
+}
+
+void GameManager::movePointerLeft()
+{
+	joystick_location++;
+
+	if (joystick_location == Board::LINES_COUNT)
+	{
+		joystick_location = 0;
+	}
 }
 
 int GameManager::GetJoystickLocation()
