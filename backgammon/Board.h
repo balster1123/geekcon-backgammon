@@ -12,7 +12,8 @@ public:
 	void Move(Player player, int originalIndex, int targetIndex);
 
 private:
-    Line lines[24];
+    const static int LINES_COUNT = 24;
+    Line lines[LINES_COUNT];
 	int currentOriginIndex;
 	int* validMovementOptions;
 

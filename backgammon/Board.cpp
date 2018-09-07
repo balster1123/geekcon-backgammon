@@ -26,6 +26,30 @@ void Board::Setup()
 
 void Board::DisplayPieces()
 {
+    for(int line_index = 0; line_index < LINES_COUNT; line_index++)
+    {
+        Line line = lines[line_index];
+
+        if (line.player != PLAYER_NONE)
+        {
+            char piece;
+            if (line.player == PLAYER_FIRST)
+            {
+                piece = '1';
+            }
+            if (line.player == PLAYER_SECOND)
+            {
+                piece = '2';
+            }
+
+            for (int i = 0; i < line.pieces; i++)
+            {
+                std::cout << piece << std::endl;
+            }
+        }
+
+        std::cout << std::endl;
+    }
 }
 
 void Board::SetOriginPiece(Player player, int index)
