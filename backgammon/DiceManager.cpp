@@ -22,7 +22,7 @@ int* DiceManager::GetDiceResults()
 
 int DiceManager::getDieResult(int dieId)
 {
-
+    return 0;
 }
 
 

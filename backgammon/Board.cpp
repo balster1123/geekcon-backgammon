@@ -77,6 +77,8 @@ bool Board::Move(int originalIndex, int targetIndex)
 	tryEat(toLine, fromLine, targetIndex);
 
 	finalizeMovement(fromLine, toLine);
+
+    return true;
 }
 
 bool Board::MoveFromDead(int playerId, int targetIndex)
@@ -87,6 +89,8 @@ bool Board::MoveFromDead(int playerId, int targetIndex)
 	tryEat(toLine, fromLine, targetIndex);
 
 	finalizeMovement(fromLine, toLine);
+
+    return true;
 }
 
 bool Board::MoveToDead(int originIndex)
@@ -95,6 +99,8 @@ bool Board::MoveToDead(int originIndex)
 	Line& toLine = dead_pools[fromLine.player];
 
 	finalizeMovement(fromLine, toLine);
+
+    return true;
 }
 
 bool Board::MoveToFinish(int originIndex)
@@ -103,6 +109,8 @@ bool Board::MoveToFinish(int originIndex)
 	Line& toLine = finished_pools[fromLine.player];
 
 	finalizeMovement(fromLine, toLine);
+
+    return true;
 }
 
 void Board::tryEat(Line & toLine, Line& fromLine, int targetIndex)

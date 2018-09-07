@@ -4,7 +4,6 @@
 class Board
 {
 public:
-	const static int LINES_COUNT = 24;
 	Board();
 	void Init();
 	void DisplayPieces(int joystick_location = -1, int selected_location = -1);
@@ -13,22 +12,22 @@ public:
 
     // Returns whether a move was successful
     bool Move(int originalIndex, int targetIndex);
+
 	void tryEat(Line & toLine, Line & fromLine, int targetIndex);
 	bool MoveFromDead(int playerId, int targetIndex);
 	bool MoveToDead(int originIndex);
 	bool MoveToFinish(int originIndex);
-
-
+    const static int LINES_COUNT = 24;
+    
 private:
+    void finalizeMovement(Line fromLine, Line toLine);
+
     Line lines[LINES_COUNT];
     Line dead_pools[2]; // Pieces that were eaten. Note the location in the array goes by the "enum Players"
     Line finished_pools[2]; // Pieces that finished the game. Note the location in the array goes by the "enum Players"
 
 	int currentOriginIndex;
 	int* validMovementOptions;
-
-	void finalizeMovement(Line fromLine, Line toLine);
-
 
 };
 
