@@ -116,15 +116,47 @@ void check_joystick()
   select = digitalRead(SEL); // will be HIGH (1) if not pressed, and LOW (0) if pressed
   
   // print out the values
-  Serial.print("vertical: ");
-  Serial.print(vertical,DEC);
-  Serial.print(" horizontal: ");
-  Serial.print(horizontal,DEC);
-  Serial.print(" select: ");
+  if (vertical > 600)
+  {
+    Serial.print("UP ");
+  }
+  if (vertical < 450)
+  {
+    Serial.print("DOWN ");
+  }
+  if (horizontal > 600)
+  {
+    Serial.print("RIGHT ");
+  }
+  if (horizontal < 450)
+  {
+    Serial.print("LEFT ");
+  }
+
+  const bool VERBOSE_JOYSTICK_PRINT = false;
+
+  if (VERBOSE_JOYSTICK_PRINT)
+  {
+      Serial.print("vertical: ");
+      Serial.print(vertical,DEC);
+      Serial.print(" horizontal: ");
+      Serial.print(horizontal,DEC);
+      Serial.print(" select: ");
+  }
   if(select == HIGH)
-    Serial.println("not pressed");
+  {
+    if (VERBOSE_JOYSTICK_PRINT)
+    {
+        Serial.println("not pressed");
+    }
+  }
   else
     Serial.println("PRESSED!");
+
+  if (not VERBOSE_JOYSTICK_PRINT)
+  {
+    Serial.println(".");
+  }
 }  
 
 void loop() {
