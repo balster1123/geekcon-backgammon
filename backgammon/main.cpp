@@ -1,27 +1,32 @@
+#define UNIT_TESTS 1
+#ifdef UNIT_TESTS
+
 #include <iostream>
 
 #include "Board.h"
-
+#include "framework.h"
 
 void test()
 {
-    printf("Starting tests!\n");
+    Log::debug("Starting tests!");
     Board* board = new Board();
 
-    printf("Empty board:\n");
+    Log::debug("Empty board:");
     board->DisplayPieces();
 
-    printf("Initializing game:\n");
+    Log::debug("Initializing game:");
     board->Setup();
     board->DisplayPieces();    
 
-    printf("Finished tests!\n");
+    Log::debug("Finished tests!");
 }
 
 int main()
 {
-    printf("Hello world!\n");
-    printf("Remember the Arduino uses backgammon.ino as a startup point\n\n");
+    Log::debug("Hello world!");
+    Log::debug("Remember the Arduino uses backgammon.ino as a startup point\n");
 
     test();
 }
+
+#endif

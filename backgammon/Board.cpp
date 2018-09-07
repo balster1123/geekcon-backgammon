@@ -1,3 +1,6 @@
+#include <iostream>
+
+
 #include "Board.h"
 #include "framework.h"
 
@@ -44,11 +47,11 @@ void Board::DisplayPieces()
 
             for (int i = 0; i < line.pieces; i++)
             {
-                printf("%s", piece.c_str());
+                Log::debug(piece, false);
             }
         }
 
-        printf("\n");
+        Log::debug("");
     }
 }
 
