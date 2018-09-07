@@ -6,7 +6,7 @@ Board::Board()
 }
 
 
-void Board::Setup()
+void Board::Init()
 {
     Players_t a = PLAYER_FIRST;
 	lines[5] = Line(PLAYER_FIRST, 5);
@@ -52,13 +52,13 @@ void Board::DisplayPieces()
     }
 }
 
-void Board::SetOriginPiece(Player player, int index)
+/*void Board::SetOriginPiece(Player player, int index)
 {
 
-}
+}*/
 
 
-void Board::Move(Player player, int originalIndex, int targetIndex)
+void Board::Move(Players_t player, int originalIndex, int targetIndex)
 {
 
 }

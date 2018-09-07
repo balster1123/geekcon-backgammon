@@ -1,4 +1,3 @@
-#include "Player.h"
 #include "Line.h"
 
 #pragma once
@@ -6,10 +5,10 @@ class Board
 {
 public:
 	Board();
-	void Setup();
+	void Init();
 	void DisplayPieces();
-	void SetOriginPiece(Player player, int index);
-	void Move(Player player, int originalIndex, int targetIndex);
+	// void SetOriginPiece(Player player, int index); // Yonatan: What is this? (It doesn't compile, commenting out since I don't understand it)
+	void Move(Players_t player, int originalIndex, int targetIndex);
 
 private:
     const static int LINES_COUNT = 24;

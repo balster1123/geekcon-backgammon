@@ -10,12 +10,13 @@ void test()
     board->DisplayPieces();
 
     DEBUG("Initializing game:");
-    board->Setup();
+    board->Init();
     board->DisplayPieces();    
 
     DEBUG("Finished tests!");
 }
 
+#ifndef ARDUINO_PLATFORM // "main() doesn't allow the normal arduino flow (setup/loop) to run"
 int main()
 {
     DEBUG("Hello world!");
@@ -23,3 +24,4 @@ int main()
 
     test();
 }
+#endif

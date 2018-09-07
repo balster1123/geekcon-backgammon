@@ -1,6 +1,6 @@
 #pragma once
 
-#define ARDUINO_PLATFORM
+#include "Settings.h"
 
 #ifndef ARDUINO_PLATFORM
 #include <iostream>
