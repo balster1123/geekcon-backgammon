@@ -1,3 +1,5 @@
+#include "GameManager.h"
+
 #include "Adafruit_WS2801.h"
 #include "SPI.h" // Comment out this line if using Trinket or Gemma
 #ifdef __AVR_ATtiny85__
@@ -74,13 +76,14 @@ const int SEL = 2; // digital
 
 // ------------------------------------------------------------------------------------
 
-
+GameManager gameManager;
 
 void setup() {
   // Serial:
   Serial.begin(9600);
   Serial.print("init1");
   
+  gameManager = GameManager();
 
   // --------------------------------------------------------------------------------  
   // JOYSTICK
@@ -119,18 +122,22 @@ void check_joystick()
   if (vertical > 600)
   {
     Serial.print("UP ");
+    gameManager.PlayerRequestedPointerMove(DIRECTION_UP);
   }
   if (vertical < 450)
   {
     Serial.print("DOWN ");
+    gameManager.PlayerRequestedPointerMove(DIRECTION_DOWN);
   }
   if (horizontal > 600)
   {
     Serial.print("RIGHT ");
+    gameManager.PlayerRequestedPointerMove(DIRECTION_RIGHT);
   }
   if (horizontal < 450)
   {
     Serial.print("LEFT ");
+    gameManager.PlayerRequestedPointerMove(DIRECTION_LEFT);
   }
 
   const bool VERBOSE_JOYSTICK_PRINT = false;
@@ -159,18 +166,48 @@ void check_joystick()
   }
 }  
 
+void DisplayBoardWithLeds()
+{
+    for (int i=0; i < strip.numPixels(); i++)
+    {
+        strip.setPixelColor(i, Color(255, 0, 0));
+    }
+
+    int joystick_location = gameManager.GetJoystickLocation();
+
+    // Verify joystick location is not out of bounds
+    if ((joystick_location >=0) && (joystick_location < strip.numPixels()))
+    {
+        strip.setPixelColor(joystick_location, Color(0, 255, 0));
+    }
+
+    strip.show(); 
+
+    delay(500);
+}
+
 void loop() {
   Serial.print("loop1");
   check_joystick();
   
   // Some example procedures showing how to display to the pixels
   
-  colorWipe(Color(255, 0, 0), 50);
-  colorWipe(Color(0, 255, 0), 50);
-  colorWipe(Color(0, 0, 255), 50);
-  rainbow(20);
-  rainbowCycle(20);
+  const bool DO_RAINBOW_FROM_EXAMPLE = false;
+
+  if (DO_RAINBOW_FROM_EXAMPLE)
+  {
+      colorWipe(Color(255, 0, 0), 50);
+      colorWipe(Color(0, 255, 0), 50);
+      colorWipe(Color(0, 0, 255), 50);
+      rainbow(20);
+      rainbowCycle(20);
+  }
+  else
+  {
+    DisplayBoardWithLeds();
+  }
 }
+
 
 void rainbow(uint8_t wait) {
   int i, j;
