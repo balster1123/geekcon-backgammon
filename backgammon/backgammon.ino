@@ -158,7 +158,10 @@ void check_joystick()
     }
   }
   else
+  {
     Serial.println("PRESSED!");
+    gameManager.PlayerPressed();
+  }
 
   if (not VERBOSE_JOYSTICK_PRINT)
   {
@@ -179,6 +182,21 @@ void DisplayBoardWithLeds()
     if ((joystick_location >=0) && (joystick_location < strip.numPixels()))
     {
         strip.setPixelColor(joystick_location, Color(0, 255, 0));
+    }
+
+    int selected_location = gameManager.GetSelectedLocation();
+
+    // Verify joystick location is not out of bounds
+    if ((selected_location >=0) && (selected_location < strip.numPixels()))
+    {
+        if (selected_location != joystick_location)
+        {
+            strip.setPixelColor(selected_location, Color(0, 0, 255));
+        }
+        else
+        {
+            strip.setPixelColor(selected_location, Color(0, 100, 200));
+        }
     }
 
     strip.show(); 

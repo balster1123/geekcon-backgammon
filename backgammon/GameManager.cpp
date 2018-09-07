@@ -4,6 +4,7 @@
 GameManager::GameManager()
 {
     joystick_location = 0;
+    selected_location = -1;
 }
 
 void GameManager::InitBoard()
@@ -26,4 +27,14 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
 int GameManager::GetJoystickLocation()
 {
     return joystick_location;
+}
+
+int GameManager::GetSelectedLocation()
+{
+    return selected_location;
+}
+
+void GameManager::PlayerPressed()
+{
+    selected_location = joystick_location;
 }
