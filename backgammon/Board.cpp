@@ -86,12 +86,51 @@ bool Board::Move(int originalIndex, int targetIndex)
         (toLine.player != PLAYER_NONE))
     {
         // One was eaten
-        dead_pools[toLine.player].pieces += 1;
-
-        toLine.pieces = 0;
+		MoveToDead(1 - fromLine.player, targetIndex);
     }
 
     toLine.player = fromLine.player;
     fromLine.pieces -= 1;
     toLine.pieces += 1;
+}
+
+bool Board::MoveFromDead(int playerId, int targetIndex)
+{
+	Line& fromLine = dead_pools[playerId];
+	Line& toLine = lines[targetIndex];
+	]
+
+	// Eating?
+	if ((toLine.player != fromLine.player) &&
+		(toLine.player != PLAYER_NONE) &&
+		(toLine.pieces == 1))
+	{
+		// One was eaten
+		MoveToDead(1 - playerId, targetIndex);
+	}
+
+	finalizeMovement();
+}
+
+bool Board::MoveToDead(int playerId, int originIndex)
+{
+	Line& fromLine = lines[originIndex];
+	Line& toLine = dead_pools[playerId];
+
+	finalizeMovement(fromLine, toLine);
+}
+
+bool Board::MoveToFinish(int playerId, int originIndex)
+{
+	Line& fromLine = lines[originIndex];
+	Line& toLine = finished_pools[playerId];
+
+	finalizeMovement(fromLine, toLine);
+}
+
+void Board::finalizeMovement(Line fromLine, Line toLine)
+{
+	toLine.player = fromLine.player;
+	fromLine.pieces -= 1;
+	toLine.pieces += 1;
 }

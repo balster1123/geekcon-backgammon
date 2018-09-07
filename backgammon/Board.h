@@ -13,6 +13,10 @@ public:
 
     // Returns whether a move was successful
     bool Move(int originalIndex, int targetIndex);
+	bool MoveFromDead(int playerId, int targetIndex);
+	bool MoveToDead(int playerId, int originIndex);
+	bool MoveToFinish(int playerId, int originIndex);
+
 
 private:
     Line lines[LINES_COUNT];
@@ -21,6 +25,9 @@ private:
 
 	int currentOriginIndex;
 	int* validMovementOptions;
+
+	void finalizeMovement(Line fromLine, Line toLine);
+
 
 };
 
