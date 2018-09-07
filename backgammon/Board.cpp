@@ -32,23 +32,23 @@ void Board::DisplayPieces()
 
         if (line.player != PLAYER_NONE)
         {
-            char piece;
+            std::string piece;
             if (line.player == PLAYER_FIRST)
             {
-                piece = '1';
+                piece = "1";
             }
             if (line.player == PLAYER_SECOND)
             {
-                piece = '2';
+                piece = "2";
             }
 
             for (int i = 0; i < line.pieces; i++)
             {
-                std::cout << piece << std::endl;
+                printf("%s", piece.c_str());
             }
         }
 
-        std::cout << std::endl;
+        printf("\n");
     }
 }
 

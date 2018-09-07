@@ -5,15 +5,18 @@
 
 void test()
 {
-    std::cout << "Starting tests!" << std::endl;
+    printf("Starting tests!\n");
     Board* board = new Board();
-    std::cout << "Finished tests!" << std::endl;
+
+    board->DisplayPieces();
+
+    printf("Finished tests!\n");
 }
 
 int main()
 {
-    std::cout << "Hello world!" << std::endl;
-    std::cout << "Remember the Arduino uses backgammon.ino as a startup point" << std::endl << std::endl;
+    printf("Hello world!\n");
+    printf("Remember the Arduino uses backgammon.ino as a startup point\n\n");
 
     test();
 }
