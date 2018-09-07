@@ -200,6 +200,7 @@ void DisplayBoardWithLeds()
     }
 
     strip.show(); 
+    gameManager.PrintBoardForDebug();
 
     delay(500);
 }

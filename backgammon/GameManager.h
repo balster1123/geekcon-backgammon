@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Board.h"
+
 typedef enum Directions
 { 
     DIRECTION_UP,
@@ -22,10 +24,12 @@ public:
     // Player pressed the joystick in the current location.
     // This will set the location found in GetJoystickLocation --> in to GetSelectedLocation
     void PlayerPressed();
+    void PrintBoardForDebug();
 
 private:
 	int currentPlayer;
     int joystick_location; // Where is the player pointing at with the joystick?
     int selected_location; // See GetSelectedLocation()
+    Board board;
 };
 

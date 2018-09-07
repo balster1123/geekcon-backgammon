@@ -24,10 +24,30 @@ void Board::Init()
 }
 
 
-void Board::DisplayPieces()
+void Board::DisplayPieces(int joystick_location, int selected_location)
 {
+    DEBUG("--------------------------------");
+    DEBUG("--------------------------------");
     for(int line_index = 0; line_index < LINES_COUNT; line_index++)
     {
+        if (joystick_location == line_index)
+        {
+            DEBUG_NONEWLINE("J");
+        }
+        else
+        {
+            DEBUG_NONEWLINE(" ");
+        }
+
+        if (selected_location == line_index)
+        {
+            DEBUG_NONEWLINE("S");
+        }
+        else
+        {
+            DEBUG_NONEWLINE(" ");
+        }
+
         Line line = lines[line_index];
 
         if (line.player != PLAYER_NONE)
@@ -44,7 +64,7 @@ void Board::DisplayPieces()
 
             for (int i = 0; i < line.pieces; i++)
             {
-                DEBUG(piece, false);
+                DEBUG_NONEWLINE(piece);
             }
         }
 

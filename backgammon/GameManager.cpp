@@ -1,15 +1,15 @@
 #include "GameManager.h"
 
-
 GameManager::GameManager()
 {
-    joystick_location = 0;
-    selected_location = -1;
+    InitBoard();
 }
 
 void GameManager::InitBoard()
 {
-
+    joystick_location = 0;
+    selected_location = -1;
+    board.Init();
 }
 
 void GameManager::PlayerRequestedPointerMove(Directions_t direction)
@@ -37,4 +37,9 @@ int GameManager::GetSelectedLocation()
 void GameManager::PlayerPressed()
 {
     selected_location = joystick_location;
+}
+
+void GameManager::PrintBoardForDebug()
+{
+    board.DisplayPieces(joystick_location, selected_location);
 }
