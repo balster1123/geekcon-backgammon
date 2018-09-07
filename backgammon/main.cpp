@@ -8,7 +8,12 @@ void test()
     printf("Starting tests!\n");
     Board* board = new Board();
 
+    printf("Empty board:\n");
     board->DisplayPieces();
+
+    printf("Initializing game:\n");
+    board->Setup();
+    board->DisplayPieces();    
 
     printf("Finished tests!\n");
 }
