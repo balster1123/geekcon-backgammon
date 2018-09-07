@@ -21,6 +21,11 @@ void Board::Init()
 
 	currentOriginIndex = -1;
 	//validMovementOptions = {};
+
+    dead_pools[PLAYER_FIRST].player = PLAYER_FIRST;
+    dead_pools[PLAYER_SECOND].player = PLAYER_SECOND;
+    finished_pools[PLAYER_FIRST].player = PLAYER_FIRST;
+    finished_pools[PLAYER_SECOND].player = PLAYER_SECOND;
 }
 
 
@@ -28,6 +33,7 @@ void Board::DisplayPieces(int joystick_location, int selected_location)
 {
     DEBUG("--------------------------------");
     DEBUG("--------------------------------");
+    DEBUG("Board:");
     for(int line_index = 0; line_index < LINES_COUNT; line_index++)
     {
         if (joystick_location == line_index)
@@ -50,26 +56,18 @@ void Board::DisplayPieces(int joystick_location, int selected_location)
 
         Line line = lines[line_index];
 
-        if (line.player != PLAYER_NONE)
-        {
-            const char* piece;
-            if (line.player == PLAYER_FIRST)
-            {
-                piece = "1";
-            }
-            if (line.player == PLAYER_SECOND)
-            {
-                piece = "2";
-            }
-
-            for (int i = 0; i < line.pieces; i++)
-            {
-                DEBUG_NONEWLINE(piece);
-            }
-        }
+        line.Print();
 
         DEBUG("");
     }
+    DEBUG("Dead pool: ");
+    dead_pools[PLAYER_FIRST].Print();
+    dead_pools[PLAYER_SECOND].Print();
+    DEBUG("");
+    DEBUG("Finished pool: ");
+    finished_pools[PLAYER_FIRST].Print();
+    finished_pools[PLAYER_SECOND].Print();
+    DEBUG("");
 }
 
 /*void Board::SetOriginPiece(Player player, int index)
@@ -87,7 +85,8 @@ bool Board::Move(int originalIndex, int targetIndex)
     if ((toLine.player != fromLine.player) &&
         (toLine.player != PLAYER_NONE))
     {
-        // TODO: One was eaten
+        // One was eaten
+        dead_pools[toLine.player].pieces += 1;
 
         toLine.pieces = 0;
     }

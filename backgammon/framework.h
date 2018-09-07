@@ -8,9 +8,9 @@
 
 typedef enum Players
 { 
-    PLAYER_FIRST = 1,
-    PLAYER_SECOND = 2,
-    PLAYER_NONE = 0,
+    PLAYER_FIRST = 0,
+    PLAYER_SECOND = 1,
+    PLAYER_NONE = -1,
 } Players_t;
 
 
