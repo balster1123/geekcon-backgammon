@@ -78,7 +78,21 @@ void Board::DisplayPieces(int joystick_location, int selected_location)
 }*/
 
 
-void Board::Move(Players_t player, int originalIndex, int targetIndex)
+bool Board::Move(int originalIndex, int targetIndex)
 {
+    Line& fromLine = lines[originalIndex];
+    Line& toLine = lines[targetIndex];
 
+    // Eating?
+    if ((toLine.player != fromLine.player) &&
+        (toLine.player != PLAYER_NONE))
+    {
+        // TODO: One was eaten
+
+        toLine.pieces = 0;
+    }
+
+    toLine.player = fromLine.player;
+    fromLine.pieces -= 1;
+    toLine.pieces += 1;
 }

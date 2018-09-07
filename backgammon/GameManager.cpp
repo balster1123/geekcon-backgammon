@@ -36,7 +36,32 @@ int GameManager::GetSelectedLocation()
 
 void GameManager::PlayerPressed()
 {
-    selected_location = joystick_location;
+    // Player regretted their selection?
+    if (selected_location == joystick_location)
+    {
+        // Reset the selection
+        selected_location = -1;
+        return;
+    }
+
+    // Nothing is selected yet?
+    if (selected_location == -1)
+    {
+        selected_location = joystick_location;
+        return;
+    }
+
+    // Something WAS already selected, and now a DIFFERENT thing was?
+    // Player wants to make a move
+    if ((selected_location != -1) &&
+        (joystick_location != selected_location))
+    {
+        board.Move(selected_location, joystick_location);
+
+        // Reset the selection
+        selected_location = -1;
+        return;
+    }
 }
 
 void GameManager::PrintBoardForDebug()

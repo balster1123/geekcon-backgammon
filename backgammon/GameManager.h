@@ -22,7 +22,6 @@ public:
     int GetSelectedLocation();
 
     // Player pressed the joystick in the current location.
-    // This will set the location found in GetJoystickLocation --> in to GetSelectedLocation
     void PlayerPressed();
     void PrintBoardForDebug();
 
