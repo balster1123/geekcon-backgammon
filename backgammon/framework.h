@@ -1,6 +1,10 @@
 #pragma once
 
+#define ARDUINO_PLATFORM
+
+#ifndef ARDUINO_PLATFORM
 #include <iostream>
+#endif
 
 typedef enum Players
 { 
@@ -8,6 +12,11 @@ typedef enum Players
     PLAYER_SECOND = 2,
     PLAYER_NONE = 0,
 } Players_t;
+
+
+#ifdef ARDUINO_PLATFORM
+#define DEBUG
+#else
 
 class Log
 {
@@ -26,3 +35,6 @@ public:
         debug(text.c_str(), newline);
     }
 };
+
+#define DEBUG Log::debug
+#endif

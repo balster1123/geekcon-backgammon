@@ -1,6 +1,3 @@
-#include <iostream>
-
-
 #include "Board.h"
 #include "framework.h"
 
@@ -35,7 +32,7 @@ void Board::DisplayPieces()
 
         if (line.player != PLAYER_NONE)
         {
-            std::string piece;
+            const char* piece;
             if (line.player == PLAYER_FIRST)
             {
                 piece = "1";
@@ -47,11 +44,11 @@ void Board::DisplayPieces()
 
             for (int i = 0; i < line.pieces; i++)
             {
-                Log::debug(piece, false);
+                DEBUG(piece, false);
             }
         }
 
-        Log::debug("");
+        DEBUG("");
     }
 }
 
