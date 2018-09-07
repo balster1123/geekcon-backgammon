@@ -14,8 +14,8 @@ public:
     // Returns whether a move was successful
     bool Move(int originalIndex, int targetIndex);
 	bool MoveFromDead(int playerId, int targetIndex);
-	bool MoveToDead(int playerId, int originIndex);
-	bool MoveToFinish(int playerId, int originIndex);
+	bool MoveToDead(int originIndex);
+	bool MoveToFinish(int originIndex);
 
 
 private:

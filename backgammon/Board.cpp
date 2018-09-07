@@ -8,7 +8,6 @@ Board::Board()
 
 void Board::Init()
 {
-    Players_t a = PLAYER_FIRST;
 	lines[5] = Line(PLAYER_FIRST, 5);
 	lines[7] = Line(PLAYER_FIRST, 3);
 	lines[12] = Line(PLAYER_FIRST, 5);
@@ -70,62 +69,50 @@ void Board::DisplayPieces(int joystick_location, int selected_location)
     DEBUG("");
 }
 
-/*void Board::SetOriginPiece(Player player, int index)
-{
-
-}*/
-
-
 bool Board::Move(int originalIndex, int targetIndex)
 {
     Line& fromLine = lines[originalIndex];
     Line& toLine = lines[targetIndex];
 
-    // Eating?
-    if ((toLine.player != fromLine.player) &&
-        (toLine.player != PLAYER_NONE))
-    {
-        // One was eaten
-		MoveToDead(1 - fromLine.player, targetIndex);
-    }
+	tryEat(toLine, fromLine, targetIndex);
 
-    toLine.player = fromLine.player;
-    fromLine.pieces -= 1;
-    toLine.pieces += 1;
+	finalizeMovement(fromLine, toLine);
 }
 
 bool Board::MoveFromDead(int playerId, int targetIndex)
 {
 	Line& fromLine = dead_pools[playerId];
 	Line& toLine = lines[targetIndex];
-	]
 
-	// Eating?
+	tryEat(toLine, fromLine, targetIndex);
+
+	finalizeMovement(fromLine, toLine);
+}
+
+bool Board::MoveToDead(int originIndex)
+{
+	Line& fromLine = lines[originIndex];
+	Line& toLine = dead_pools[fromLine.player];
+
+	finalizeMovement(fromLine, toLine);
+}
+
+bool Board::MoveToFinish(int originIndex)
+{
+	Line& fromLine = lines[originIndex];
+	Line& toLine = finished_pools[fromLine.player];
+
+	finalizeMovement(fromLine, toLine);
+}
+
+void Board::tryEat(Line & toLine, Line& fromLine, int targetIndex)
+{
 	if ((toLine.player != fromLine.player) &&
 		(toLine.player != PLAYER_NONE) &&
 		(toLine.pieces == 1))
 	{
-		// One was eaten
-		MoveToDead(1 - playerId, targetIndex);
+		MoveToDead(targetIndex);
 	}
-
-	finalizeMovement();
-}
-
-bool Board::MoveToDead(int playerId, int originIndex)
-{
-	Line& fromLine = lines[originIndex];
-	Line& toLine = dead_pools[playerId];
-
-	finalizeMovement(fromLine, toLine);
-}
-
-bool Board::MoveToFinish(int playerId, int originIndex)
-{
-	Line& fromLine = lines[originIndex];
-	Line& toLine = finished_pools[playerId];
-
-	finalizeMovement(fromLine, toLine);
 }
 
 void Board::finalizeMovement(Line fromLine, Line toLine)
