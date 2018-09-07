@@ -1,1 +1,9 @@
-clear &&  g++ main.cpp Board.cpp Piece.cpp Line.cpp && ./a.out
+clear &&  g++ \
+		main.cpp \
+		Board.cpp \
+		DiceManager.cpp \
+		Die.cpp \
+	    GameManager.cpp \
+		Line.cpp
+		Piece.cpp && \
+		./a.out

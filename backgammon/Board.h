@@ -13,6 +13,7 @@ public:
 
     // Returns whether a move was successful
     bool Move(int originalIndex, int targetIndex);
+	void tryEat(Line & toLine, Line & fromLine, int targetIndex);
 	bool MoveFromDead(int playerId, int targetIndex);
 	bool MoveToDead(int originIndex);
 	bool MoveToFinish(int originIndex);
