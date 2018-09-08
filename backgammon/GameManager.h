@@ -41,8 +41,5 @@ private:
     int joystick_location; // Where is the player pointing at with the joystick?
     int selected_location; // See GetSelectedLocation()
     Board board;
-
-	void movePointerRight();
-	void movePointerLeft();
 };
 
