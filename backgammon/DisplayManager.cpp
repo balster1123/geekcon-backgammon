@@ -103,7 +103,7 @@ void DisplayManager::displayLineBinary(Line line, int lineIndex)
 void DisplayManager::displayLineCumulative(Line line, int lineIndex)
 {
   int overflows = floor(line.pieces / PIXELS_PER_LINE);
-  int remainder = line.pieces % PIXELS_PER_LINE;
+  int remainder = line.pieces % (PIXELS_PER_LINE - 1);
 
   // First LED is for the cursor
   int i;
