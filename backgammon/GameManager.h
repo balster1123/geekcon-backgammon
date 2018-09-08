@@ -17,14 +17,14 @@ public:
 	GameManager(Adafruit_WS2801& ledStrip);
 	void InitBoard();
     void HandleTick();
-    void PlayerRequestedPointerMove(Directions_t direction);
+    bool PlayerRequestedPointerMove(Directions_t direction);
     int GetJoystickLocation();
     
     // Where the player selected - and probably wants to move from here. -1 if nothing is selected
     int GetSelectedLocation();
 
     // Player pressed the joystick in the current location.
-    void PlayerPressed();
+    bool PlayerPressed();
     void PrintBoardForDebug();
 
 private:

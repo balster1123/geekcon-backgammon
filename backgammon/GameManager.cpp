@@ -19,7 +19,7 @@ void GameManager::HandleTick()
     displayManager->DisplayBoard(joystick_location, selected_location);
 }
 
-void GameManager::PlayerRequestedPointerMove(Directions_t direction)
+bool GameManager::PlayerRequestedPointerMove(Directions_t direction)
 {
     if (direction == DIRECTION_LEFT)
     {
@@ -27,26 +27,26 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
             (joystick_location < LOCATION_ROAD_FIRST_HALF_MAX))
         {
             joystick_location++;
-            return;
+            return true;
         }
 
         if ((LOCATION_ROAD_SECOND_HALF_MIN < joystick_location) &&
             (joystick_location <= LOCATION_ROAD_MAX))
         {
             joystick_location--;
-            return;
+            return true;
         }
 
         if (LOCATION_DEADPOOL_1 == joystick_location)
         {
             joystick_location = LOCATION_DEADPOOL_2;
-            return;
+            return true;
         }
 
         if (LOCATION_FINISHED == joystick_location)
         {
             joystick_location = LOCATION_DEADPOOL_1;
-            return;
+            return true;
         }
     }
     if (direction == DIRECTION_RIGHT)
@@ -61,26 +61,26 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
             (joystick_location <= LOCATION_ROAD_FIRST_HALF_MAX))
         {
             joystick_location--;
-            return;
+            return true;
         }
 
         if ((LOCATION_ROAD_SECOND_HALF_MIN <= joystick_location) &&
             (joystick_location < LOCATION_ROAD_MAX))
         {
             joystick_location++;
-            return;
+            return true;
         }
 
         if (LOCATION_DEADPOOL_2 == joystick_location)
         {
             joystick_location = LOCATION_DEADPOOL_1;
-            return;
+            return true;
         }
 
         if (LOCATION_DEADPOOL_1 == joystick_location)
         {
             joystick_location = LOCATION_FINISHED;
-            return;
+            return true;
         }
     }
 
@@ -97,25 +97,25 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
             {
                 joystick_location = LOCATION_DEADPOOL_2;
             }
-            return;
+            return true;
         }
 
         if (LOCATION_DEADPOOL_2 == joystick_location)
         {
             joystick_location = LOCATION_ROAD_SECOND_HALF_MIN + 3;
-            return;
+            return true;
         }
 
         if (LOCATION_DEADPOOL_1 == joystick_location)
         {
             joystick_location = LOCATION_ROAD_SECOND_HALF_MIN + 9;
-            return;
+            return true;
         }
 
         if (LOCATION_FINISHED == joystick_location)
         {
             joystick_location = LOCATION_ROAD_MAX;
-            return;
+            return true;
         }
     }
 
@@ -132,29 +132,30 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
             {
                 joystick_location = LOCATION_DEADPOOL_1;
             }
-            return;
+            return true;
         }
 
         if (LOCATION_DEADPOOL_2 == joystick_location)
         {
             joystick_location = LOCATION_ROAD_FIRST_HALF_MAX - 3;
-            return;
+            return true;
         }
 
         if (LOCATION_DEADPOOL_1 == joystick_location)
         {
             joystick_location = LOCATION_ROAD_FIRST_HALF_MAX - 9;
-            return;
+            return true;
         }
 
         if (LOCATION_FINISHED == joystick_location)
         {
             joystick_location = LOCATION_ROAD_MIN;
-            return;
+            return true;
         }
     }
 
     DEBUG("Nothing to do with this move request");
+    return false;
 }
 
 int GameManager::GetJoystickLocation()
@@ -167,21 +168,23 @@ int GameManager::GetSelectedLocation()
     return selected_location;
 }
 
-void GameManager::PlayerPressed()
+bool GameManager::PlayerPressed()
 {
+    DEBUG("Player Pressed");
+
     // Player regretted their selection?
     if (selected_location == joystick_location)
     {
         // Reset the selection
         selected_location = LOCATION_INVALID;
-        return;
+        return true;
     }
 
     // Nothing is selected yet?
     if (selected_location == LOCATION_INVALID)
     {
         selected_location = joystick_location;
-        return;
+        return true;
     }
 
     // Something WAS already selected, and now a DIFFERENT thing was?
@@ -193,8 +196,10 @@ void GameManager::PlayerPressed()
 
         // Reset the selection
         selected_location = LOCATION_INVALID;
-        return;
+        return true;
     }
+
+    return false;
 }
 
 void GameManager::PrintBoardForDebug()

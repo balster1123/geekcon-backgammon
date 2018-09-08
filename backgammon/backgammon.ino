@@ -118,26 +118,27 @@ void check_joystick()
   horizontal = analogRead(HORIZ); // will be 0-1023
   select = digitalRead(SEL); // will be HIGH (1) if not pressed, and LOW (0) if pressed
   
+  bool anythingChanged = false;
   // print out the values
   if (vertical > 600)
   {
     Serial.print("UP ");
-    gameManager->PlayerRequestedPointerMove(DIRECTION_UP);
+    anythingChanged = gameManager->PlayerRequestedPointerMove(DIRECTION_UP);
   }
   if (vertical < 450)
   {
     Serial.print("DOWN ");
-    gameManager->PlayerRequestedPointerMove(DIRECTION_DOWN);
+    anythingChanged = gameManager->PlayerRequestedPointerMove(DIRECTION_DOWN);
   }
   if (horizontal > 600)
   {
     Serial.print("RIGHT ");
-    gameManager->PlayerRequestedPointerMove(DIRECTION_RIGHT);
+    anythingChanged = gameManager->PlayerRequestedPointerMove(DIRECTION_RIGHT);
   }
   if (horizontal < 450)
   {
     Serial.print("LEFT ");
-    gameManager->PlayerRequestedPointerMove(DIRECTION_LEFT);
+    anythingChanged = gameManager->PlayerRequestedPointerMove(DIRECTION_LEFT);
   }
 
   const bool VERBOSE_JOYSTICK_PRINT = false;
@@ -160,13 +161,22 @@ void check_joystick()
   else
   {
     Serial.println("PRESSED!");
-    gameManager->PlayerPressed();
+    if (gameManager->PlayerPressed())
+    {
+        anythingChanged = true;
+    }
   }
 
   if (not VERBOSE_JOYSTICK_PRINT)
   {
     //Serial.println(".");
   }
+
+  if (anythingChanged)
+  {
+    gameManager->PrintBoardForDebug();
+  }
+
 }  
 
 void DisplayBoardWithLeds()
@@ -200,7 +210,7 @@ void DisplayBoardWithLeds()
     }
 
     strip.show(); 
-    gameManager->PrintBoardForDebug();
+    // gameManager->PrintBoardForDebug();
 
     delay(500);
 }
@@ -224,7 +234,7 @@ void loop() {
   else
   {
     //DisplayBoardWithLeds();
-    // gameManager->PrintBoardForDebug();
+    //gameManager->PrintBoardForDebug();
 
     //Serial.print("Before handle tick\n");
     gameManager->HandleTick();
