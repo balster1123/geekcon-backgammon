@@ -34,40 +34,48 @@ void DisplayManager::displayLine(int lineIndex)
       return;
     }
 
-    int ledIndex = PIXELS_PER_LINE * lineIndex;
+    int firstLedIndex = PIXELS_PER_LINE * lineIndex;
     /*if (IS_DISPLAY_BINARY)
     {
-      displayLineBinary(line, ledIndex);
+      displayLineBinary(line, firstLedIndex);
     }
     else
     {*/
-      displayLineCumulative(line, lineIndex, ledIndex);
+      displayLineCumulative(line, lineIndex, firstLedIndex);
     //}
 }
 
-void DisplayManager::displayLineBinary(Line line, int lineIndex, int ledIndex)
+void DisplayManager::displayLineBinary(Line line, int lineIndex, int firstLedIndex)
 {
   
 }
 
-void DisplayManager::displayLineCumulative(Line line, int lineIndex, int ledIndex)
+void DisplayManager::displayLineCumulative(Line line, int lineIndex, int firstLedIndex)
 {
   int overflows = floor(line.pieces / PIXELS_PER_LINE);
   int remainder = line.pieces % PIXELS_PER_LINE;
 
   // First LED is for the cursor
-  for (int i = 1; i < PIXELS_PER_LINE; i++)
+  int i;
+  for (i = 1; i < PIXELS_PER_LINE; i++)
   {
     uint32_t color = Color(0, 0, 0);
 
     if (i <= remainder) {
       color = GetPlayerColors(line.player, overflows);
+      DEBUG("Displaying player led ");
+      DEBUG("Line index: ");
+      DEBUG(lineIndex);
     } else if (overflows > 0) {
       color = GetPlayerColors(line.player, overflows - 1);
+      DEBUG("Displaying overflow led");
     }
 
-    displayLed(lineIndex, ledIndex, color);
+    int ledIndexInLine = i;
+    displayLed(lineIndex, ledIndexInLine, color);
+    
   }
+  DEBUG("\n");
 }
 
 void DisplayManager::displayLed(int lineIndex, int ledIndex, uint32_t color)

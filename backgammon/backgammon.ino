@@ -226,9 +226,10 @@ void loop() {
     //DisplayBoardWithLeds();
     gameManager.PrintBoardForDebug();
 
-    Serial.print("Before handle tick");
+    Serial.print("Before handle tick\n");
     gameManager.HandleTick();
-    Serial.print("After handle tick");
+    Serial.print("After handle tick\n");
+    delay(500);
   }
 }
 
