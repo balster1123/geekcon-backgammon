@@ -125,7 +125,7 @@ void DisplayManager::displayLineCumulative(Line line, int lineIndex)
     displayLed(lineIndex, ledIndexInLine, color);
     
   }
-  DEBUG("\n");
+  //DEBUG("\n");
 }
 
 void DisplayManager::displayLed(int lineIndex, int ledIndex, uint32_t color)
