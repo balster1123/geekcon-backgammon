@@ -18,5 +18,6 @@ private:
   void displayLineBinary(Line line, int lineIndex);
   void displayLineCumulative(Line line, int lineIndex);
   void displayLed(int lineIndex, int ledIndex, uint32_t color);
+  void displayLonelyLine(Line* line, int first_led_index, int led_count);
 
 };
