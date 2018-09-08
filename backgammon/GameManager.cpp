@@ -14,7 +14,7 @@ GameManager::GameManager(Adafruit_WS2801 ledStrip)
 void GameManager::InitBoard()
 {
     joystick_location = 0;
-    selected_location = -1;
+    selected_location = LOCATION_INVALID;
     board.Init();
 }
 
@@ -161,27 +161,6 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
     DEBUG("Nothing to do with this move request");
 }
 
-void GameManager::movePointerRight()
-{
-	joystick_location--;
-
-	if (joystick_location == -1)
-	{
-		joystick_location = Board::LINES_COUNT-1;
-	}
-
-}
-
-void GameManager::movePointerLeft()
-{
-	joystick_location++;
-
-	if (joystick_location == Board::LINES_COUNT)
-	{
-		joystick_location = 0;
-	}
-}
-
 int GameManager::GetJoystickLocation()
 {
     return joystick_location;
@@ -198,12 +177,12 @@ void GameManager::PlayerPressed()
     if (selected_location == joystick_location)
     {
         // Reset the selection
-        selected_location = -1;
+        selected_location = LOCATION_INVALID;
         return;
     }
 
     // Nothing is selected yet?
-    if (selected_location == -1)
+    if (selected_location == LOCATION_INVALID)
     {
         selected_location = joystick_location;
         return;
@@ -211,13 +190,13 @@ void GameManager::PlayerPressed()
 
     // Something WAS already selected, and now a DIFFERENT thing was?
     // Player wants to make a move
-    if ((selected_location != -1) &&
+    if ((selected_location != LOCATION_INVALID) &&
         (joystick_location != selected_location))
     {
         board.Move(selected_location, joystick_location);
 
         // Reset the selection
-        selected_location = -1;
+        selected_location = LOCATION_INVALID;
         return;
     }
 }
