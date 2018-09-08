@@ -3,6 +3,7 @@
 
 #define SMALL_RANDOM random(15)
 
+#define COLOR_OFF Color(0, 0, 0)
 #define COLOR_NONE Color(10 + SMALL_RANDOM, 10 + SMALL_RANDOM, 10 + SMALL_RANDOM)
 #define JOYSTICK_COLOR Color(100 + SMALL_RANDOM, 100 + SMALL_RANDOM, 0)
 #define SELECTED_COLOR Color(0, 200 + SMALL_RANDOM, 0)
@@ -84,9 +85,14 @@ void DisplayManager::clearBoard()
       strip.setPixelColor(i, COLOR_NONE);
     }
 
+    strip.setPixelColor(120, COLOR_OFF);
+    strip.setPixelColor(120 + 8, COLOR_OFF);
+    strip.setPixelColor(120 + 8 + 4, COLOR_OFF);
+
+
     for (int j = 0; j < LINES_AMOUNT; j++)
     {
-        displayLed(j, 0 /*led index*/ , Color(0,0,0));
+        displayLed(j, 0 /*led index*/ , COLOR_OFF);
     }
 }
 
