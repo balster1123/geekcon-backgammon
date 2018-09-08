@@ -10,6 +10,17 @@ typedef enum Directions
     DIRECTION_RIGHT,
 } Directions_t;
 
+// These locations are for joystick_location and selected_location;
+// They have NOTHING to do with the leds / ascii / other-ui representations
+const int LOCATION_ROAD_MIN = 0;
+const int LOCATION_ROAD_FIRST_HALF_MAX = 11;
+const int LOCATION_ROAD_SECOND_HALF_MIN = 12;
+const int LOCATION_ROAD_MAX = 23;
+const int LOCATION_INVALID = -100;
+const int LOCATION_DEADPOOL_1 = -1;
+const int LOCATION_DEADPOOL_2 = -2;
+const int LOCATION_FINISHED = -3;
+
 class GameManager
 {
 public:
