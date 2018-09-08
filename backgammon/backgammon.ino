@@ -39,7 +39,7 @@ uint8_t clockPin = 13;    // Green wire on Adafruit Pixels
 // and the +5V wire to a +5V supply
 
 // Set the first variable to the NUMBER of pixels. 25 = 25 pixels in a row
-Adafruit_WS2801 strip = Adafruit_WS2801(120 + 8, dataPin, clockPin);
+Adafruit_WS2801 strip = Adafruit_WS2801(120 + 8 + 4 + 4, dataPin, clockPin);
 
 // Optional: leave off pin numbers to use hardware SPI
 // (pinout is then specific to each board and can't be changed)
@@ -105,6 +105,8 @@ void setup() {
   // Update LED contents, to start they are all 'off'
   strip.show();
   // --------------------------------------------------------------------------------  
+
+  gameManager->PrintBoardForDebug();
 }
 
 
