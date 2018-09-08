@@ -1,10 +1,12 @@
 #include "DisplayManager.h"
 #include <math.h>
 
-#define COLOR_NONE Color(10, 10, 10)
-#define JOYSTICK_COLOR Color(100, 100, 0)
-#define SELECTED_COLOR Color(0, 200, 0)
-#define BOTH_JOYSTICK_SELECTED_COLOR Color(0, 100, 100)
+#define SMALL_RANDOM random(15)
+
+#define COLOR_NONE Color(10 + SMALL_RANDOM, 10 + SMALL_RANDOM, 10 + SMALL_RANDOM)
+#define JOYSTICK_COLOR Color(100 + SMALL_RANDOM, 100 + SMALL_RANDOM, 0)
+#define SELECTED_COLOR Color(0, 200 + SMALL_RANDOM, 0)
+#define BOTH_JOYSTICK_SELECTED_COLOR Color(0, 100 + SMALL_RANDOM, 100 + SMALL_RANDOM)
 
 
 
