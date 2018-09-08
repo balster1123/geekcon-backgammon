@@ -22,6 +22,7 @@ public:
 	bool MoveToFinish(int originIndex);
 private:
 	bool isValidMove(Line& fromLine, Line& toLine);
+	bool isValidDirection(int player, int originIndex, int targetIndex);
     void finalizeMovement(Line& fromLine, Line& toLine);
 
     Line lines[LINES_COUNT];

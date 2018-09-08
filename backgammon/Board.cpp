@@ -79,7 +79,8 @@ bool Board::Move(int originalIndex, int targetIndex)
     Line& fromLine = lines[originalIndex];
     Line& toLine = lines[targetIndex];
     
-    if (!isValidMove(fromLine, toLine))
+    if (!isValidMove(fromLine, toLine) || 
+        !isValidDirection(fromLine.player, originalIndex, targetIndex))
     {
         return false;
     }
@@ -138,6 +139,19 @@ bool Board::isValidMove(Line& fromLine, Line& toLine)
     }
 
     return true;
+}
+
+bool Board::isValidDirection(int player, int originIndex, int targetIndex)
+{
+    switch (player)
+    {
+        case 1:
+            return originIndex > targetIndex;
+        case 2:
+            return originIndex < targetIndex;
+        default:
+            return false;
+    }
 }
 
 void Board::tryEat(Line & toLine, Line& fromLine, int targetIndex)
