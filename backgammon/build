@@ -4,6 +4,5 @@ clear &&  g++ \
 		DiceManager.cpp \
 		Die.cpp \
 	    GameManager.cpp \
-		Line.cpp \
-		Piece.cpp && \
+		Line.cpp && \
 		./a.out
