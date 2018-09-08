@@ -171,7 +171,7 @@ bool Board::isValidMove(Line* fromLine, Line* toLine)
 
 bool Board::isValidDirection(int player, int originIndex, int targetIndex)
 {
-    bool isValid = true
+    bool isValid = true;
     if ((player == PLAYER_FIRST && originIndex > targetIndex) ||
         (player == PLAYER_SECOND && originIndex < target))
     {
