@@ -1,9 +1,10 @@
 #include "DisplayManager.h"
 #include <math.h>
 
-#define COLOR_NONE Color(20, 20, 20)
-#define JOYSTICK_COLOR Color(200, 200, 0)
-#define SELECTED_COLOR Color(0, 200, 200)
+#define COLOR_NONE Color(10, 10, 10)
+#define JOYSTICK_COLOR Color(100, 100, 0)
+#define SELECTED_COLOR Color(0, 200, 0)
+#define BOTH_JOYSTICK_SELECTED_COLOR Color(0, 100, 100)
 
 
 
@@ -22,16 +23,23 @@ void DisplayManager::DisplayBoard(int joystick_location, int selected_location)
     displayLine(i);
   }
 
-  if ((LOCATION_ROAD_MIN <= joystick_location) &&
-            (joystick_location <= LOCATION_ROAD_MAX))
-  {
-    displayLed(joystick_location, 0 /*led index*/ , JOYSTICK_COLOR);
-  }
-
   if ((LOCATION_ROAD_MIN <= selected_location) &&
             (selected_location < LOCATION_ROAD_MAX))
   {
     displayLed(selected_location, 0 /*led index*/ , SELECTED_COLOR);
+  }
+
+  if ((LOCATION_ROAD_MIN <= joystick_location) &&
+            (joystick_location <= LOCATION_ROAD_MAX))
+  {
+    if (joystick_location == selected_location)
+    {
+        displayLed(joystick_location, 0 /*led index*/ , BOTH_JOYSTICK_SELECTED_COLOR);
+    }
+    else
+    {
+        displayLed(joystick_location, 0 /*led index*/ , JOYSTICK_COLOR);
+    }
   }
 
   if (LOCATION_FINISHED == joystick_location)
@@ -72,6 +80,11 @@ void DisplayManager::clearBoard()
     for (int i = 0; i < strip.numPixels(); i++)
     {
       strip.setPixelColor(i, COLOR_NONE);
+    }
+
+    for (int j = 0; j < LINES_AMOUNT; j++)
+    {
+        displayLed(j, 0 /*led index*/ , Color(0,0,0));
     }
 }
 
