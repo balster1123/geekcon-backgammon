@@ -86,7 +86,7 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
 
     if (direction == DIRECTION_UP)
     {
-        if ((LOCATION_ROAD_MIN < joystick_location) &&
+        if ((LOCATION_ROAD_MIN <= joystick_location) &&
             (joystick_location <= LOCATION_ROAD_FIRST_HALF_MAX))
         {
             if (joystick_location < 6)
@@ -121,7 +121,7 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
 
     if (direction == DIRECTION_DOWN)
     {
-        if ((LOCATION_ROAD_SECOND_HALF_MIN < joystick_location) &&
+        if ((LOCATION_ROAD_SECOND_HALF_MIN <= joystick_location) &&
             (joystick_location <= LOCATION_ROAD_MAX))
         {
             if (joystick_location < LOCATION_ROAD_SECOND_HALF_MIN + 6)
