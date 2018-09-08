@@ -39,7 +39,7 @@ uint8_t clockPin = 13;    // Green wire on Adafruit Pixels
 // and the +5V wire to a +5V supply
 
 // Set the first variable to the NUMBER of pixels. 25 = 25 pixels in a row
-Adafruit_WS2801 strip = Adafruit_WS2801(4, dataPin, clockPin);
+Adafruit_WS2801 strip = Adafruit_WS2801(120, dataPin, clockPin);
 
 // Optional: leave off pin numbers to use hardware SPI
 // (pinout is then specific to each board and can't be changed)
@@ -273,18 +273,6 @@ void colorWipe(uint32_t c, uint8_t wait) {
 }
 
 /* Helper functions */
-
-// Create a 24 bit color value from R,G,B
-uint32_t Color(byte r, byte g, byte b)
-{
-  uint32_t c;
-  c = r;
-  c <<= 8;
-  c |= g;
-  c <<= 8;
-  c |= b;
-  return c;
-}
 
 //Input a value 0 to 255 to get a color value.
 //The colours are a transition r - g -b - back to r
