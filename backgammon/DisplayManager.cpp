@@ -156,14 +156,10 @@ void DisplayManager::displayLineCumulative(Line line, int lineIndex)
   {
     uint32_t color = COLOR_NONE;
 
-    if (i <= remainder) {
+    if (i <= remainder || remainder == 0) {
       color = GetPlayerColors(line.player, overflows);
-      //DEBUG("Displaying player led ");
-      //DEBUG("Line index: ");
-      //DEBUG(lineIndex);
     } else if (overflows > 0) {
       color = GetPlayerColors(line.player, overflows - 1);
-      //DEBUG("Displaying overflow led");
     }
 
     int ledIndexInLine = i;
