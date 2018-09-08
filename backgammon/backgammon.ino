@@ -229,7 +229,7 @@ void loop() {
     //Serial.print("Before handle tick\n");
     gameManager->HandleTick();
     //Serial.print("After handle tick\n");
-    //delay(500);
+    delay(200);
   }
 }
 
