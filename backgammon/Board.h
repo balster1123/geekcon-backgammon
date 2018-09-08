@@ -7,6 +7,9 @@ public:
 	Board();
 	void Init();
 	void DisplayPieces(int joystick_location = -1, int selected_location = -1);
+    Line GetLine(int index);
+    
+    const static int LINES_COUNT = 24;
 
     // void SetOriginPiece(Player player, int index); // Yonatan: What is this? (It doesn't compile, commenting out since I don't understand it)
 
@@ -17,8 +20,6 @@ public:
 	bool MoveFromDead(int playerId, int targetIndex);
 	bool MoveToDead(int originIndex);
 	bool MoveToFinish(int originIndex);
-    const static int LINES_COUNT = 24;
-    
 private:
     void finalizeMovement(Line fromLine, Line toLine);
 

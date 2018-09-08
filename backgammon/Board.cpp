@@ -69,6 +69,11 @@ void Board::DisplayPieces(int joystick_location, int selected_location)
     DEBUG("");
 }
 
+Line Board::GetLine(int index)
+{
+    return lines[index];
+}
+
 bool Board::Move(int originalIndex, int targetIndex)
 {
     Line& fromLine = lines[originalIndex];
