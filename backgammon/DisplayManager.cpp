@@ -17,6 +17,25 @@ DisplayManager::DisplayManager(Adafruit_WS2801 newStrip, Board* newBoard)
 	board = newBoard;
 }
 
+void DisplayManager::displayLonelyLine(Line* line, int first_led_index, int led_count)
+{
+  int overflows = floor(line->pieces / PIXELS_PER_LINE);
+  int remainder = line->pieces % (PIXELS_PER_LINE - 1);
+
+  for (int ledIndexInLine = 1; ledIndexInLine < PIXELS_PER_LINE; ledIndexInLine++) // Skip the first led
+  {
+    uint32_t color = COLOR_NONE;
+
+    if (ledIndexInLine <= remainder) {
+      color = GetPlayerColors(line->player, overflows);
+    } else if (overflows > 0) {
+      color = GetPlayerColors(line->player, overflows - 1);
+    }
+
+    strip.setPixelColor(first_led_index + ledIndexInLine, color);    
+  }
+}
+
 void DisplayManager::DisplayBoard(int joystick_location, int selected_location)
 {
   clearBoard();
@@ -25,6 +44,11 @@ void DisplayManager::DisplayBoard(int joystick_location, int selected_location)
   {
     displayLine(i);
   }
+
+  displayLonelyLine(&board->dead_pools[PLAYER_FIRST], 120+8, 4);
+  displayLonelyLine(&board->dead_pools[PLAYER_SECOND], 120+8+4, 4);
+  displayLonelyLine(&board->finished_pools[PLAYER_FIRST], 120, 4);
+  displayLonelyLine(&board->dead_pools[PLAYER_SECOND], 120+3, 4);
 
   if ((LOCATION_ROAD_MIN <= selected_location) &&
             (selected_location < LOCATION_ROAD_MAX))
