@@ -5,7 +5,7 @@ GameManager::GameManager()
 
 }
 
-GameManager::GameManager(Adafruit_WS2801 ledStrip)
+GameManager::GameManager(Adafruit_WS2801& ledStrip)
 {
     InitBoard();
     displayManager = &DisplayManager(ledStrip, &board);

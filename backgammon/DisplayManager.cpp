@@ -13,6 +13,8 @@ void DisplayManager::DisplayBoard()
   {
     displayLine(i);
   }
+
+  strip.show();   // write all the pixels out
 }
 
 void DisplayManager::clearBoard()

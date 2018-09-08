@@ -39,7 +39,7 @@ uint8_t clockPin = 13;    // Green wire on Adafruit Pixels
 // and the +5V wire to a +5V supply
 
 // Set the first variable to the NUMBER of pixels. 25 = 25 pixels in a row
-Adafruit_WS2801 strip = Adafruit_WS2801(120, dataPin, clockPin);
+Adafruit_WS2801 strip = Adafruit_WS2801(120 + 8, dataPin, clockPin);
 
 // Optional: leave off pin numbers to use hardware SPI
 // (pinout is then specific to each board and can't be changed)
@@ -223,8 +223,12 @@ void loop() {
   }
   else
   {
-    // DisplayBoardWithLeds();
+    //DisplayBoardWithLeds();
+    gameManager.PrintBoardForDebug();
+
+    Serial.print("Before handle tick");
     gameManager.HandleTick();
+    Serial.print("After handle tick");
   }
 }
 

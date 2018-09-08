@@ -26,7 +26,7 @@ class GameManager
 {
 public:
     GameManager();
-	GameManager(Adafruit_WS2801 ledStrip);
+	GameManager(Adafruit_WS2801& ledStrip);
 	void InitBoard();
     void HandleTick();
 
