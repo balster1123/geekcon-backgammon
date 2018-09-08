@@ -128,7 +128,7 @@ void Board::tryEat(Line & toLine, Line& fromLine, int targetIndex)
 	}
 }
 
-void Board::finalizeMovement(Line fromLine, Line toLine)
+void Board::finalizeMovement(Line& fromLine, Line& toLine)
 {
 	toLine.player = fromLine.player;
 	fromLine.pieces -= 1;

@@ -21,7 +21,7 @@ public:
 	bool MoveToDead(int originIndex);
 	bool MoveToFinish(int originIndex);
 private:
-    void finalizeMovement(Line fromLine, Line toLine);
+    void finalizeMovement(Line& fromLine, Line& toLine);
 
     Line lines[LINES_COUNT];
     Line dead_pools[2]; // Pieces that were eaten. Note the location in the array goes by the "enum Players"
