@@ -21,11 +21,11 @@ uint32_t GetPlayerColors(int playerId, int overflowCount = 0)
    				case 0:
    					return Color(100, 0, 0);
    				case 1:
-   					return Color(150, 0, 0);
+   					return Color(150, 20, 0);
    				case 2:
-   					return Color(200, 0, 0);
+   					return Color(200, 50, 0);
    				case 3:
-   					return Color(255, 0, 0);
+   					return Color(255, 200, 0);
    			}
       		break;
     	case PLAYER_SECOND:
@@ -34,11 +34,11 @@ uint32_t GetPlayerColors(int playerId, int overflowCount = 0)
    				case 0:
    					return Color(0, 0, 100);
    				case 1:
-   					return Color(0, 0, 150);
+   					return Color(0, 20, 150);
    				case 2:
-   					return Color(0, 0, 200);
+   					return Color(0, 50, 200);
    				case 3:
-   					return Color(0, 0, 255);
+   					return Color(0, 200, 255);
    			}
 			break;
 	}

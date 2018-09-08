@@ -1,6 +1,8 @@
 #include "DisplayManager.h"
 #include <math.h>
 
+#define COLOR_NONE Color(50, 50, 50)
+
 DisplayManager::DisplayManager(Adafruit_WS2801 newStrip, Board* newBoard)
 {
 	strip = newStrip;
@@ -35,7 +37,7 @@ void DisplayManager::clearBoard()
 {
     for (int i = 0; i < strip.numPixels(); i++)
     {
-      strip.setPixelColor(i, Color(0,0, 0));
+      strip.setPixelColor(i, COLOR_NONE);
     }
 }
 
@@ -73,7 +75,7 @@ void DisplayManager::displayLineCumulative(Line line, int lineIndex)
   int i;
   for (i = 1; i < PIXELS_PER_LINE; i++)
   {
-    uint32_t color = Color(0, 0, 0);
+    uint32_t color = COLOR_NONE;
 
     if (i <= remainder) {
       color = GetPlayerColors(line.player, overflows);
