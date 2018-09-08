@@ -1,7 +1,11 @@
 #include "DisplayManager.h"
 #include <math.h>
 
-#define COLOR_NONE Color(50, 50, 50)
+#define COLOR_NONE Color(20, 20, 20)
+#define JOYSTICK_COLOR Color(200, 200, 0)
+#define SELECTED_COLOR Color(0, 200, 200)
+
+
 
 DisplayManager::DisplayManager(Adafruit_WS2801 newStrip, Board* newBoard)
 {
@@ -19,15 +23,45 @@ void DisplayManager::DisplayBoard(int joystick_location, int selected_location)
   }
 
   if ((LOCATION_ROAD_MIN <= joystick_location) &&
-            (joystick_location < LOCATION_ROAD_MAX))
+            (joystick_location <= LOCATION_ROAD_MAX))
   {
-    displayLed(joystick_location, 0 /*led index*/ , Color(127, 127, 0)/*color*/);
+    displayLed(joystick_location, 0 /*led index*/ , JOYSTICK_COLOR);
   }
 
   if ((LOCATION_ROAD_MIN <= selected_location) &&
             (selected_location < LOCATION_ROAD_MAX))
   {
-    displayLed(selected_location, 0 /*led index*/ , Color(0, 127, 127)/*color*/);
+    displayLed(selected_location, 0 /*led index*/ , SELECTED_COLOR);
+  }
+
+  if (LOCATION_FINISHED == joystick_location)
+  {
+    strip.setPixelColor(120, JOYSTICK_COLOR);
+  }
+
+  if (LOCATION_FINISHED == selected_location)
+  {
+    strip.setPixelColor(120, SELECTED_COLOR);
+  }
+
+  if (LOCATION_DEADPOOL_1 == joystick_location)
+  {
+    strip.setPixelColor(128, JOYSTICK_COLOR);
+  }
+
+  if (LOCATION_DEADPOOL_1 == selected_location)
+  {
+    strip.setPixelColor(128, SELECTED_COLOR);
+  }
+
+  if (LOCATION_DEADPOOL_2 == joystick_location)
+  {
+    strip.setPixelColor(128 + 4, JOYSTICK_COLOR);
+  }
+
+  if (LOCATION_DEADPOOL_2 == selected_location)
+  {
+    strip.setPixelColor(128 + 4, SELECTED_COLOR);
   }
 
   strip.show();   // write all the pixels out
