@@ -1,3 +1,8 @@
+#include "Adafruit_WS2801.h"
+#include "Board.h"
+#include "Line.h"
+#include "framework.h"
+
 #pragma once
 class DisplayManager
 {
@@ -10,5 +15,8 @@ private:
 
 	void clearBoard();
 	void displayLine(int index);
-};
+  void displayLineBinary(Line line, int lineIndex, int ledIndex);
+  void displayLineCumulative(Line line, int lineIndex, int ledIndex);
+  void displayLed(int lineIndex, int ledIndex, uint32_t color);
 
+};
