@@ -42,3 +42,12 @@ public:
 // The following is a mistake, it will still create a new line:
 #define DEBUG_NONEWLINE NonArduinoLog::debug
 #endif
+
+const int LOCATION_ROAD_MIN = 0;
+const int LOCATION_ROAD_FIRST_HALF_MAX = 11;
+const int LOCATION_ROAD_SECOND_HALF_MIN = 12;
+const int LOCATION_ROAD_MAX = 23;
+const int LOCATION_INVALID = -100;
+const int LOCATION_DEADPOOL_1 = -1;
+const int LOCATION_DEADPOOL_2 = -2;
+const int LOCATION_FINISHED = -3;

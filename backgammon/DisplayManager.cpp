@@ -7,11 +7,25 @@ DisplayManager::DisplayManager(Adafruit_WS2801 newStrip, Board* newBoard)
 	board = newBoard;
 }
 
-void DisplayManager::DisplayBoard()
+void DisplayManager::DisplayBoard(int joystick_location, int selected_location)
 {
+  clearBoard();
+
   for (int i = 0; i < LINES_AMOUNT; i ++)
   {
     displayLine(i);
+  }
+
+  if ((LOCATION_ROAD_MIN <= joystick_location) &&
+            (joystick_location < LOCATION_ROAD_MAX))
+  {
+    displayLed(joystick_location, 0 /*led index*/ , Color(127, 127, 0)/*color*/);
+  }
+
+  if ((LOCATION_ROAD_MIN <= selected_location) &&
+            (selected_location < LOCATION_ROAD_MAX))
+  {
+    displayLed(selected_location, 0 /*led index*/ , Color(0, 127, 127)/*color*/);
   }
 
   strip.show();   // write all the pixels out
@@ -63,12 +77,12 @@ void DisplayManager::displayLineCumulative(Line line, int lineIndex)
 
     if (i <= remainder) {
       color = GetPlayerColors(line.player, overflows);
-      DEBUG("Displaying player led ");
-      DEBUG("Line index: ");
-      DEBUG(lineIndex);
+      //DEBUG("Displaying player led ");
+      //DEBUG("Line index: ");
+      //DEBUG(lineIndex);
     } else if (overflows > 0) {
       color = GetPlayerColors(line.player, overflows - 1);
-      DEBUG("Displaying overflow led");
+      //DEBUG("Displaying overflow led");
     }
 
     int ledIndexInLine = i;

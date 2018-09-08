@@ -1,9 +1,5 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
-{
-
-}
 
 GameManager::GameManager(Adafruit_WS2801& ledStrip)
 {
@@ -20,7 +16,7 @@ void GameManager::InitBoard()
 
 void GameManager::HandleTick()
 {
-    displayManager->DisplayBoard();
+    displayManager->DisplayBoard(joystick_location, selected_location);
 }
 
 void GameManager::PlayerRequestedPointerMove(Directions_t direction)
@@ -95,11 +91,11 @@ void GameManager::PlayerRequestedPointerMove(Directions_t direction)
         {
             if (joystick_location < 6)
             {
-                joystick_location = LOCATION_DEADPOOL_2;
+                joystick_location = LOCATION_DEADPOOL_1;
             }
             else
             {
-                joystick_location = LOCATION_DEADPOOL_1;
+                joystick_location = LOCATION_DEADPOOL_2;
             }
             return;
         }

@@ -76,14 +76,14 @@ const int SEL = 2; // digital
 
 // ------------------------------------------------------------------------------------
 
-GameManager gameManager;
+GameManager* gameManager;
 
 void setup() {
   // Serial:
   Serial.begin(9600);
   Serial.print("init1");
   
-  gameManager = GameManager(strip);
+  gameManager = new GameManager(strip);
 
   // --------------------------------------------------------------------------------  
   // JOYSTICK
@@ -122,22 +122,22 @@ void check_joystick()
   if (vertical > 600)
   {
     Serial.print("UP ");
-    gameManager.PlayerRequestedPointerMove(DIRECTION_UP);
+    gameManager->PlayerRequestedPointerMove(DIRECTION_UP);
   }
   if (vertical < 450)
   {
     Serial.print("DOWN ");
-    gameManager.PlayerRequestedPointerMove(DIRECTION_DOWN);
+    gameManager->PlayerRequestedPointerMove(DIRECTION_DOWN);
   }
   if (horizontal > 600)
   {
     Serial.print("RIGHT ");
-    gameManager.PlayerRequestedPointerMove(DIRECTION_RIGHT);
+    gameManager->PlayerRequestedPointerMove(DIRECTION_RIGHT);
   }
   if (horizontal < 450)
   {
     Serial.print("LEFT ");
-    gameManager.PlayerRequestedPointerMove(DIRECTION_LEFT);
+    gameManager->PlayerRequestedPointerMove(DIRECTION_LEFT);
   }
 
   const bool VERBOSE_JOYSTICK_PRINT = false;
@@ -160,12 +160,12 @@ void check_joystick()
   else
   {
     Serial.println("PRESSED!");
-    gameManager.PlayerPressed();
+    gameManager->PlayerPressed();
   }
 
   if (not VERBOSE_JOYSTICK_PRINT)
   {
-    Serial.println(".");
+    //Serial.println(".");
   }
 }  
 
@@ -176,7 +176,7 @@ void DisplayBoardWithLeds()
         strip.setPixelColor(i, Color(255, 0, 0));
     }
 
-    int joystick_location = gameManager.GetJoystickLocation();
+    int joystick_location = gameManager->GetJoystickLocation();
 
     // Verify joystick location is not out of bounds
     if ((joystick_location >=0) && (joystick_location < strip.numPixels()))
@@ -184,7 +184,7 @@ void DisplayBoardWithLeds()
         strip.setPixelColor(joystick_location, Color(0, 255, 0));
     }
 
-    int selected_location = gameManager.GetSelectedLocation();
+    int selected_location = gameManager->GetSelectedLocation();
 
     // Verify joystick location is not out of bounds
     if ((selected_location >=0) && (selected_location < strip.numPixels()))
@@ -200,13 +200,13 @@ void DisplayBoardWithLeds()
     }
 
     strip.show(); 
-    gameManager.PrintBoardForDebug();
+    gameManager->PrintBoardForDebug();
 
     delay(500);
 }
 
 void loop() {
-  Serial.print("loop1");
+  // Serial.print("loop1");
   check_joystick();
   
   // Some example procedures showing how to display to the pixels
@@ -224,12 +224,12 @@ void loop() {
   else
   {
     //DisplayBoardWithLeds();
-    gameManager.PrintBoardForDebug();
+    // gameManager->PrintBoardForDebug();
 
-    Serial.print("Before handle tick\n");
-    gameManager.HandleTick();
-    Serial.print("After handle tick\n");
-    delay(500);
+    //Serial.print("Before handle tick\n");
+    gameManager->HandleTick();
+    //Serial.print("After handle tick\n");
+    //delay(500);
   }
 }
 

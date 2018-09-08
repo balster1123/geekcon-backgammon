@@ -8,7 +8,7 @@ class DisplayManager
 {
 public:
 	DisplayManager(Adafruit_WS2801 newStrip, Board* board);
-	void DisplayBoard();
+	void DisplayBoard(int joystick_location, int selected_location);
 private:
 	Adafruit_WS2801 strip;
 	Board* board;
