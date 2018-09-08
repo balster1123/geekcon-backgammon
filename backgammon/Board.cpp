@@ -159,8 +159,9 @@ bool Board::MoveToDead(int originIndex)
 bool Board::isValidMove(Line* fromLine, Line* toLine)
 {
     // is the place occupied by the opponent 
-    if (toLine->player == 3 - fromLine->player &&
-        toLine->pieces > 1)
+    if ((toLine->player != fromLine->player) &&
+        (toLine->player != PLAYER_NONE) &&
+        (toLine->pieces > 1))
     {
         DEBUG("Invalid move - target occupied by opponent");
         return false;
