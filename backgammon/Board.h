@@ -21,6 +21,7 @@ public:
 	bool MoveToDead(int originIndex);
 	bool MoveToFinish(int originIndex);
 private:
+	bool isValidMove(Line& fromLine, Line& toLine);
     void finalizeMovement(Line& fromLine, Line& toLine);
 
     Line lines[LINES_COUNT];

@@ -128,10 +128,10 @@ bool Board::MoveToFinish(int originIndex)
     return true;
 }
 
-void Board::isValidMove(Line& fromLine, Line& toLine)
+bool Board::isValidMove(Line& fromLine, Line& toLine)
 {
     // is the place occupied by the opponent 
-    if (toLine.player = 3 - fromLine.player &&
+    if (toLine.player == 3 - fromLine.player &&
         toLine.pieces > 1)
     {
         return false;
