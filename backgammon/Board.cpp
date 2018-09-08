@@ -78,6 +78,11 @@ bool Board::Move(int originalIndex, int targetIndex)
 {
     Line& fromLine = lines[originalIndex];
     Line& toLine = lines[targetIndex];
+    
+    if (!isValidMove(fromLine, toLine))
+    {
+        return false;
+    }
 
 	tryEat(toLine, fromLine, targetIndex);
 
@@ -90,6 +95,11 @@ bool Board::MoveFromDead(int playerId, int targetIndex)
 {
 	Line& fromLine = dead_pools[playerId];
 	Line& toLine = lines[targetIndex];
+    
+    if (!isValidMove(fromLine, toLine))
+    {
+        return false;
+    }
 
 	tryEat(toLine, fromLine, targetIndex);
 
@@ -114,6 +124,18 @@ bool Board::MoveToFinish(int originIndex)
 	Line& toLine = finished_pools[fromLine.player];
 
 	finalizeMovement(fromLine, toLine);
+
+    return true;
+}
+
+void Board::isValidMove(Line& fromLine, Line& toLine)
+{
+    // is the place occupied by the opponent 
+    if (toLine.player = 3 - fromLine.player &&
+        toLine.pieces > 1)
+    {
+        return false;
+    }
 
     return true;
 }
