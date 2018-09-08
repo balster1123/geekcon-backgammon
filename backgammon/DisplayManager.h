@@ -15,8 +15,8 @@ private:
 
 	void clearBoard();
 	void displayLine(int index);
-  void displayLineBinary(Line line, int lineIndex, int ledIndex);
-  void displayLineCumulative(Line line, int lineIndex, int ledIndex);
+  void displayLineBinary(Line line, int lineIndex);
+  void displayLineCumulative(Line line, int lineIndex);
   void displayLed(int lineIndex, int ledIndex, uint32_t color);
 
 };
