@@ -135,6 +135,7 @@ bool Board::isValidMove(Line& fromLine, Line& toLine)
     if (toLine.player == 3 - fromLine.player &&
         toLine.pieces > 1)
     {
+        DEBUG("Invalid move - target occupied by opponent");
         return false;
     }
 
@@ -143,15 +144,15 @@ bool Board::isValidMove(Line& fromLine, Line& toLine)
 
 bool Board::isValidDirection(int player, int originIndex, int targetIndex)
 {
-    switch (player)
+    bool isValid = true
+    if ((player == PLAYER_FIRST && originIndex > targetIndex) ||
+        (player == PLAYER_SECOND && originIndex < target))
     {
-        case 1:
-            return originIndex > targetIndex;
-        case 2:
-            return originIndex < targetIndex;
-        default:
-            return false;
+        DEBUG("Invalid move - player can't move in this direction");
+        isValid = false;
     }
+
+    return isValid;
 }
 
 void Board::tryEat(Line & toLine, Line& fromLine, int targetIndex)
