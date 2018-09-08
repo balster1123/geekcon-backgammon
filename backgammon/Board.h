@@ -16,14 +16,13 @@ public:
     // Returns whether a move was successful
     bool Move(int originalIndex, int targetIndex);
 
-	void tryEat(Line & toLine, Line & fromLine, int targetIndex);
-	bool MoveFromDead(int playerId, int targetIndex);
+	void tryEat(Line * toLine, Line * fromLine, int targetIndex);
 	bool MoveToDead(int originIndex);
-	bool MoveToFinish(int originIndex);
 private:
-	bool isValidMove(Line& fromLine, Line& toLine);
+	bool isValidMove(Line* fromLine, Line* toLine);
 	bool isValidDirection(int player, int originIndex, int targetIndex);
-    void finalizeMovement(Line& fromLine, Line& toLine);
+    void finalizeMovement(Line* fromLine, Line* toLine);
+    Line* GetLineByLocation(int location, Players_t which_player = PLAYER_NONE);
 
     Line lines[LINES_COUNT];
     Line dead_pools[2]; // Pieces that were eaten. Note the location in the array goes by the "enum Players"

@@ -74,33 +74,70 @@ Line Board::GetLine(int index)
     return lines[index];
 }
 
-bool Board::Move(int originalIndex, int targetIndex)
+Line* Board::GetLineByLocation(int location, Players_t which_player)
 {
-    Line& fromLine = lines[originalIndex];
-    Line& toLine = lines[targetIndex];
-    
-    if (!isValidMove(fromLine, toLine) || 
-        !isValidDirection(fromLine.player, originalIndex, targetIndex))
+    if ((LOCATION_ROAD_MIN <= location) &&
+        (location <= LOCATION_ROAD_MAX))
     {
-        return false;
+        return &lines[location];
     }
 
-	tryEat(toLine, fromLine, targetIndex);
+    if (LOCATION_INVALID == location)
+    {
+        return (Line*)0;
+    }
+    
+    if (LOCATION_DEADPOOL_1 == location)
+    {
+        return &dead_pools[PLAYER_FIRST];
+    }
 
-	finalizeMovement(fromLine, toLine);
+    if (LOCATION_DEADPOOL_2 == location)
+    {
+        return &dead_pools[PLAYER_SECOND];
+    }
 
-    return true;
+    if (LOCATION_FINISHED == location)
+    {
+        
+        if (PLAYER_NONE == which_player)
+            return (Line*)0;
+            
+        return &finished_pools[which_player];
+    }
+
+    return (Line*)0;
 }
 
-bool Board::MoveFromDead(int playerId, int targetIndex)
+bool Board::Move(int originalIndex, int targetIndex)
 {
-	Line& fromLine = dead_pools[playerId];
-	Line& toLine = lines[targetIndex];
+    if (originalIndex == LOCATION_FINISHED)
+    {
+        // Invalid move
+        DEBUG("Invalid move: From the finished pool");
+        return true; // Something still changed
+    }
+
+    Line* fromLine = GetLineByLocation(originalIndex);
+
+    if (fromLine->pieces == 0)
+    {
+        DEBUG("Invalid move: From a place with no pieces");
+        return true; // Something still changed
+    }
+
+    Line* toLine = GetLineByLocation(targetIndex, fromLine->player);
     
     if (!isValidMove(fromLine, toLine))
     {
         return false;
     }
+
+    /*if (!isValidDirection(fromLine->player, originalIndex, targetIndex))
+    {
+        DEBUG("Invalid direction");
+        return false;
+    }*/
 
 	tryEat(toLine, fromLine, targetIndex);
 
@@ -111,30 +148,21 @@ bool Board::MoveFromDead(int playerId, int targetIndex)
 
 bool Board::MoveToDead(int originIndex)
 {
-	Line& fromLine = lines[originIndex];
-	Line& toLine = dead_pools[fromLine.player];
+	Line* fromLine = &lines[originIndex];
+	Line* toLine = &dead_pools[fromLine->player];
 
 	finalizeMovement(fromLine, toLine);
 
     return true;
 }
 
-bool Board::MoveToFinish(int originIndex)
-{
-	Line& fromLine = lines[originIndex];
-	Line& toLine = finished_pools[fromLine.player];
-
-	finalizeMovement(fromLine, toLine);
-
-    return true;
-}
-
-bool Board::isValidMove(Line& fromLine, Line& toLine)
+bool Board::isValidMove(Line* fromLine, Line* toLine)
 {
     // is the place occupied by the opponent 
-    if (toLine.player == 3 - fromLine.player &&
-        toLine.pieces > 1)
+    if (toLine->player == 3 - fromLine->player &&
+        toLine->pieces > 1)
     {
+        DEBUG("Invalid move");
         return false;
     }
 
@@ -154,19 +182,20 @@ bool Board::isValidDirection(int player, int originIndex, int targetIndex)
     }
 }
 
-void Board::tryEat(Line & toLine, Line& fromLine, int targetIndex)
+void Board::tryEat(Line* toLine, Line* fromLine, int targetIndex)
 {
-	if ((toLine.player != fromLine.player) &&
-		(toLine.player != PLAYER_NONE) &&
-		(toLine.pieces == 1))
+	if ((toLine->player != fromLine->player) &&
+		(toLine->player != PLAYER_NONE) &&
+		(toLine->pieces == 1))
 	{
 		MoveToDead(targetIndex);
 	}
 }
 
-void Board::finalizeMovement(Line& fromLine, Line& toLine)
+void Board::finalizeMovement(Line* fromLine, Line* toLine)
 {
-	toLine.player = fromLine.player;
-	fromLine.pieces -= 1;
-	toLine.pieces += 1;
+	toLine->player = fromLine->player;
+	fromLine->pieces -= 1;
+	toLine->pieces += 1;
+    DEBUG("Moved");
 }
