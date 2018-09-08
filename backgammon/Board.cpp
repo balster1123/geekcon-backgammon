@@ -128,7 +128,7 @@ bool Board::Move(int originalIndex, int targetIndex)
 
     Line* toLine = GetLineByLocation(targetIndex, fromLine->player);
     
-    if (!isValidMove(fromLine, toLine))
+    if (!isValidMove(originalIndex, fromLine, targetIndex, toLine))
     {
         return false;
     }
@@ -156,7 +156,7 @@ bool Board::MoveToDead(int originIndex)
     return true;
 }
 
-bool Board::isValidMove(Line* fromLine, Line* toLine)
+bool Board::isValidMove(int fromIndex, Line* fromLine, int toIndex, Line* toLine)
 {
     // is the place occupied by the opponent 
     if ((toLine->player != fromLine->player) &&
@@ -164,6 +164,12 @@ bool Board::isValidMove(Line* fromLine, Line* toLine)
         (toLine->pieces > 1))
     {
         DEBUG("Invalid move - target occupied by opponent");
+        return false;
+    }
+
+    if (abs(fromIndex - toIndex) > 6)
+    {
+        DEBUG("Invalid move - can't move more than six steps at once");
         return false;
     }
 

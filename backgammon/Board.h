@@ -22,7 +22,7 @@ public:
     Line dead_pools[2]; // Pieces that were eaten. Note the location in the array goes by the "enum Players"
     Line finished_pools[2]; // Pieces that finished the game. Note the location in the array goes by the "enum Players"
 private:
-	bool isValidMove(Line* fromLine, Line* toLine);
+	bool isValidMove(int fromIndex, Line* fromLine, int toIndex, Line* toLine);
 	bool isValidDirection(int player, int originIndex, int targetIndex);
     void finalizeMovement(Line* fromLine, Line* toLine);
     Line* GetLineByLocation(int location, Players_t which_player = PLAYER_NONE);
