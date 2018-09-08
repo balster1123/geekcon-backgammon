@@ -83,7 +83,7 @@ void setup() {
   Serial.begin(9600);
   Serial.print("init1");
   
-  gameManager = GameManager();
+  gameManager = GameManager(strip);
 
   // --------------------------------------------------------------------------------  
   // JOYSTICK
@@ -223,7 +223,8 @@ void loop() {
   }
   else
   {
-    DisplayBoardWithLeds();
+    // DisplayBoardWithLeds();
+    gameManager.HandleTick();
   }
 }
 

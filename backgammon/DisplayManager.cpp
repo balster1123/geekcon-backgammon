@@ -9,7 +9,10 @@ DisplayManager::DisplayManager(Adafruit_WS2801 newStrip, Board* newBoard)
 
 void DisplayManager::DisplayBoard()
 {
-  
+  for (int i = 0; i < LINES_AMOUNT; i ++)
+  {
+    displayLine(i);
+  }
 }
 
 void DisplayManager::clearBoard()
@@ -54,7 +57,7 @@ void DisplayManager::displayLineCumulative(Line line, int lineIndex, int ledInde
   for (int i = 1; i < PIXELS_PER_LINE; i++)
   {
     uint32_t color = Color(0, 0, 0);
-    
+
     if (i <= remainder) {
       color = GetPlayerColors(line.player, overflows);
     } else if (overflows > 0) {

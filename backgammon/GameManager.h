@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Board.h"
+#include "DisplayManager.h"
 
 typedef enum Directions
 { 
@@ -13,8 +14,11 @@ typedef enum Directions
 class GameManager
 {
 public:
-	GameManager();
+    GameManager();
+	GameManager(Adafruit_WS2801 ledStrip);
 	void InitBoard();
+    void HandleTick();
+
     void PlayerRequestedPointerMove(Directions_t direction);
     int GetJoystickLocation();
     
@@ -30,6 +34,7 @@ private:
     int joystick_location; // Where is the player pointing at with the joystick?
     int selected_location; // See GetSelectedLocation()
     Board board;
+    DisplayManager* displayManager;
 
 	void movePointerRight();
 	void movePointerLeft();

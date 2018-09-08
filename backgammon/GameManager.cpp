@@ -2,7 +2,13 @@
 
 GameManager::GameManager()
 {
+
+}
+
+GameManager::GameManager(Adafruit_WS2801 ledStrip)
+{
     InitBoard();
+    displayManager = &DisplayManager(ledStrip, &board);
 }
 
 void GameManager::InitBoard()
@@ -10,6 +16,11 @@ void GameManager::InitBoard()
     joystick_location = 0;
     selected_location = -1;
     board.Init();
+}
+
+void GameManager::HandleTick()
+{
+    displayManager->DisplayBoard();
 }
 
 void GameManager::PlayerRequestedPointerMove(Directions_t direction)
