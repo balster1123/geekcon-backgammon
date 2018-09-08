@@ -6,13 +6,6 @@
 #include <iostream>
 #endif
 
-typedef enum Players
-{ 
-    PLAYER_FIRST = 0,
-    PLAYER_SECOND = 1,
-    PLAYER_NONE = -1,
-} Players_t;
-
 
 #ifdef ARDUINO_PLATFORM
 #include <SoftwareSerial.h>
