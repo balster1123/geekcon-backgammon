@@ -20,4 +20,6 @@ private:
   void displayLed(int lineIndex, int ledIndex, uint32_t color);
   void displayLonelyLine(Line* line, int first_led_index, int led_count);
 
+int* piecesDecToBinary(int num);
+
 };

@@ -44,3 +44,16 @@ uint32_t GetPlayerColors(int playerId, int overflowCount = 0)
 	}
 }
 
+uint32_t GetBinaryColor(int playerId)
+{
+  switch (playerId)
+  {
+    case PLAYER_FIRST:
+      return Color(255, 0, 0);
+    case PLAYER_SECOND:
+      return Color(0, 0, 255);
+    default:
+      return Color(0, 255, 0);
+  }
+}
+

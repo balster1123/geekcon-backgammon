@@ -18,6 +18,7 @@ typedef enum Players
 uint32_t Color(uint8_t r, uint8_t g, uint8_t b);
 
 uint32_t GetPlayerColors(int playerId, int overflowCount = 0);
+uint32_t GetBinaryColor(int playerId);
 
 // Platform
 #define ARDUINO_PLATFORM // Only define this when running on an Arduino; Comment out when running on a laptop

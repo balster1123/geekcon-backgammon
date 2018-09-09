@@ -130,19 +130,28 @@ void DisplayManager::displayLine(int lineIndex)
     }
 
     int firstLedIndex = PIXELS_PER_LINE * lineIndex;
-    /*if (IS_DISPLAY_BINARY)
+    if (IS_DISPLAY_BINARY)
     {
       displayLineBinary(line, firstLedIndex);
     }
     else
-    {*/
+    {
       displayLineCumulative(line, lineIndex);
-    //}
+    }
 }
 
 void DisplayManager::displayLineBinary(Line line, int lineIndex)
 {
+  uint32_t color = GetBinaryColor(line.player);
+  int* binaryPieces = piecesDecToBinary(line.pieces);
   
+  for (int i = PIXELS_PER_LINE; i > 0; i--)
+  {
+    if (binaryPieces[5-i] == 1)
+    {
+      displayLed(lineIndex, i, color);
+    }
+  }
 }
 
 void DisplayManager::displayLineCumulative(Line line, int lineIndex)
@@ -163,13 +172,22 @@ void DisplayManager::displayLineCumulative(Line line, int lineIndex)
     }
 
     int ledIndexInLine = i;
-    displayLed(lineIndex, ledIndexInLine, color);
-    
+    displayLed(lineIndex, ledIndexInLine, color); 
   }
-  //DEBUG("\n");
 }
 
 void DisplayManager::displayLed(int lineIndex, int ledIndex, uint32_t color)
 {
   strip.setPixelColor((PIXELS_PER_LINE * lineIndex) + ledIndex, color);
+}
+
+int* DisplayManager::piecesDecToBinary(int num)
+{
+  int binaryPieces[4];
+  for (int i = 0; i < 4; )
+  {
+    binaryPieces[i] = num%2;
+    num = floor(num / 2);
+  }
+  return binaryPieces;
 }
