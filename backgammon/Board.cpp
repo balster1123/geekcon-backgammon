@@ -204,5 +204,11 @@ void Board::finalizeMovement(Line* fromLine, Line* toLine)
 	toLine->player = fromLine->player;
 	fromLine->pieces -= 1;
 	toLine->pieces += 1;
+
+    if (fromLine->pieces == 0)
+    {
+        fromLine->player = PLAYER_NONE;
+    }
+
     DEBUG("Moved");
 }
