@@ -13,8 +13,8 @@ void Board::Init()
 	lines[12] = Line(PLAYER_FIRST, 5);
 	lines[23] = Line(PLAYER_FIRST, 2);
 
-	lines[19] = Line(PLAYER_SECOND, 5);
-	lines[17] = Line(PLAYER_SECOND, 3);
+	lines[18] = Line(PLAYER_SECOND, 5);
+	lines[16] = Line(PLAYER_SECOND, 3);
 	lines[11] = Line(PLAYER_SECOND, 5);
 	lines[0] = Line(PLAYER_SECOND, 2);
 
